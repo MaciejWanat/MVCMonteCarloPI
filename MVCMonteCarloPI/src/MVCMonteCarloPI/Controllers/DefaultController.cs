@@ -11,26 +11,31 @@ namespace MVCMonteCarloPI.Controllers
     [Route("/")]
     public class DefaultController : Controller
     {
+     
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult IndexGET(Properties model)
         {
-            return View();
+            if (model.SquareSide != 0)
+                return View("Index", model);
+
+            return View("Index");
         }
 
         [HttpPost]
-        public IActionResult Index(Properties model)
+        public IActionResult IndexPOST(Properties model)
         {
             model.CalculatedPI = Logic.CalculatePI(model.PointsAmount, model.SquareSide);
 
-            return RedirectToAction("IndexDisplay", model);
+            return RedirectToAction("IndexGET", model);
         }
-
+        /*
         [Route("display")]
         [HttpGet]
         public IActionResult IndexDisplay(Properties model)
         {
             return View("Index", model);
         }
+        */
 
         [Route("about")]
         public IActionResult About()

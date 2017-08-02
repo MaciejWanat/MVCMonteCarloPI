@@ -9,7 +9,7 @@ namespace MVCMonteCarloPI.Entities
     {
         public int PointsAmount { get; set; }
         public int SquareSide { get; set; }
-        public double CalculatedPI { get; set; } = 0;
+        public double CalculatedPI { get; set; }
         public string Image { get; set; }
 
     }
