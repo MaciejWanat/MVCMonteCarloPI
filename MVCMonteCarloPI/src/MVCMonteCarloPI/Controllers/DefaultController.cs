@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MVCMonteCarloPI.ViewModels;
+using MVCMonteCarloPI.Entities;
 
 namespace MVCMonteCarloPI.Controllers
 {
@@ -17,12 +18,21 @@ namespace MVCMonteCarloPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(MainViewModel model)
+        public IActionResult Index(Properties model)
         {
-            return View();
+            model.CalculatedPI = Logic.CalculatePI(model.PointsAmount, model.SquareSide);
+
+            return RedirectToAction("IndexDisplay", model);
         }
 
-        [Route("/about")]
+        [Route("display")]
+        [HttpGet]
+        public IActionResult IndexDisplay(Properties model)
+        {
+            return View("Index", model);
+        }
+
+        [Route("about")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -30,7 +40,7 @@ namespace MVCMonteCarloPI.Controllers
             return View();
         }
 
-        [Route("/github")]
+        [Route("github")]
         public IActionResult GitHub()
         {
             ViewData["Message"] = "Your contact page.";
