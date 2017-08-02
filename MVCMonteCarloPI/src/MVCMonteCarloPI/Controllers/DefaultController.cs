@@ -28,14 +28,6 @@ namespace MVCMonteCarloPI.Controllers
 
             return RedirectToAction("IndexGET", model);
         }
-        /*
-        [Route("display")]
-        [HttpGet]
-        public IActionResult IndexDisplay(Properties model)
-        {
-            return View("Index", model);
-        }
-        */
 
         [Route("about")]
         public IActionResult About()
