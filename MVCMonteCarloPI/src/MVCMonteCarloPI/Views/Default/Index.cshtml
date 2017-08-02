@@ -1,0 +1,48 @@
+﻿@model MVCMonteCarloPI.Entities.Properties
+
+<h1>Approximating PI using the Monte Carlo method</h1>
+<br />
+<p>On this page you can approximate the PI value using the Monte Carlo method. Read the "About" page if you are feeling lost!</p>
+<br />
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.PointsAmount, "How many random points? (1- 10 000 000)", new { @class = "col-md-4 control-label" })
+        @Html.TextBoxFor(m => m.PointsAmount, new { @class = "form-control input-md" }) 
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SquareSide, "How long should the side of a square be? (100-800)", new { @class = "col-md-4 control-label" })
+        @Html.TextBoxFor(m => m.SquareSide, new { @class = "form-control input-md" }) 
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Calculate!" class="btn btn-primary" />
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.CalculatedPI, "", new { @class = "col-md-4 control-label" })
+    </div>
+}
+
+
+<!--
+    <div class="form-group">
+
+    </div>
+
+    <div class="form-group">
+
+    </div>
+
+    <div class="form-group">
+
+    </div>
+
+    <div class="form-group">
+
+    </div>
+    
+    Html.EditorFor(m => m.SquareSide, new { class = "form-control input-md", required = "required" })
+-->
