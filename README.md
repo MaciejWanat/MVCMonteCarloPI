@@ -8,4 +8,4 @@ This version is implemented in ASP.NET Core and it's using MVC. I also made [Web
 Application will ask you how many points to draw and how wide area should it use. You can observe how approximation gets more and more accurate when you increase area or number of points.
 
 This is an online version. It should be online at this address:
-http://montecarlopi.azurewebsites.net/
+http://mvcmontecarlopi.azurewebsites.net/
