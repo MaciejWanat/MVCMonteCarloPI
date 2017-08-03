@@ -29,17 +29,7 @@ namespace MVCMonteCarloPI.Controllers
 
         [Route("about")]
         public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        [Route("github")]
-        public IActionResult GitHub()
-        {
-            ViewData["Message"] = "Your contact page.";
-
+        {        
             return View();
         }
 
