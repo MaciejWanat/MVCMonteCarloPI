@@ -10,13 +10,16 @@ namespace MVCMonteCarloPI.Entities
         public double CalculatedPI { get; set; }
         public string ImagePath { get; set; }
 
-        public void CalculatePI() //function that calculates PI and draws graphic representation of an objecy
+        public void CalculatePI() //function that calculates PI and draws graphic representation of an object
         {
-            using (Image<Rgba32> image = new Image<Rgba32>(SquareSide, SquareSide))
+            using (Image<Rgba32> image = new Image<Rgba32>(SquareSide, SquareSide)) //set background, make image
             {
                 image.BackgroundColor(Rgba32.White);
-                DrawCircle(image, SquareSide / 2);
+                image.Save("wwwroot/images/image.png");
             }
+
+            DrawCircle("wwwroot/images/image.png", SquareSide / 2);
+            DrawBorders("wwwroot/images/image.png", SquareSide);
 
             int i = 0;
             int numInCircle = 0;
@@ -55,9 +58,9 @@ namespace MVCMonteCarloPI.Entities
 
         }
 
-        private static void DrawCircle(Image<Rgba32> image, double radius)
+        private static void DrawCircle(string imagePath, double radius)
         {
-            using (image)
+            using (Image<Rgba32> image = Image.Load(imagePath.ToString()))
             {
                 for (double l = 0.0; l < 360.0; l += 0.1)
                 {
@@ -68,7 +71,24 @@ namespace MVCMonteCarloPI.Entities
                     image[x, y] = Rgba32.Red;
                 }
 
-                image.Save("wwwroot/images/image.png");
+                image.Save(imagePath.ToString());
+            }
+        }
+
+        private static void DrawBorders(string imagePath, int squareSize)
+        {
+            using (Image<Rgba32> image = Image.Load(imagePath.ToString()))
+            {
+                for (int i = 0; i <= squareSize; i++)
+                {
+                    image[i, 0] = Rgba32.Black;             // horizontal
+                    image[i, squareSize - 1] = Rgba32.Black;
+
+                    image[0, i] = Rgba32.Black;             // vertical
+                    image[squareSize - 1, i] = Rgba32.Black;
+                }                     
+
+                image.Save(imagePath.ToString());
             }
         }
 
