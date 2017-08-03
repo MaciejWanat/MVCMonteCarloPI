@@ -27,6 +27,8 @@
         @Html.Label("CalculatedPI", "Calculated PI: ", new { @class = "col-md-4 control-label" })
         @Model.CalculatedPI
     </div>
+
+    <img src="@Url.Content(Model.Image)" alt="Image" />
     }
 
 }

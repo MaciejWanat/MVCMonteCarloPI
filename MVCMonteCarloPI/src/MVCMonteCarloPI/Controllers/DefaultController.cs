@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MVCMonteCarloPI.ViewModels;
 using MVCMonteCarloPI.Entities;
 
 namespace MVCMonteCarloPI.Controllers
