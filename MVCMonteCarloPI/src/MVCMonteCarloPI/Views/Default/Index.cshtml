@@ -9,25 +9,32 @@
 {
     <div class="form-group">
         @Html.LabelFor(m => m.PointsAmount, "How many random points? (1 - 10 000 000)", new { @class = "col-md-4 control-label" })
-        @Html.TextBoxFor(m => m.PointsAmount, new { @class = "form-control input-md" }) 
+        @Html.TextBoxFor(m => m.PointsAmount, new { @class = "form-control input-md", @type = "number" }) 
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.SquareSide, "How long should the side of a square be? (100-800)", new { @class = "col-md-4 control-label" })
-        @Html.TextBoxFor(m => m.SquareSide, new { @class = "form-control input-md" }) 
+        @Html.TextBoxFor(m => m.SquareSide, new { @class = "form-control input-md", @type = "number" }) 
     </div>
 
     <div class="form-group">
         <input type="submit" value="Calculate!" class="btn btn-primary" />
     </div>
 
-    @if(Model is MVCMonteCarloPI.Entities.PICalculationModel)
+    @if(Model is MVCMonteCarloPI.Entities.PICalculationModel && Model.isValid == true)
     {
     <div class="form-group">
         Pi calculated with <b>@Model.PointsAmount</b> random points and <b>@Model.SquareSide</b> side of the square size. Approximated Pi = <b>@Model.CalculatedPI</b>
     </div>
 
     <img src="@Url.Content(Model.ImagePath)" alt="Image" />
+    }
+    else
+    if (Model is MVCMonteCarloPI.Entities.PICalculationModel && Model.isValid == false)
+    {
+        <div class="form-group">
+            Please enter correct values!
+        </div>
     }
 
 }

@@ -9,52 +9,61 @@ namespace MVCMonteCarloPI.Entities
         public int SquareSide { get; set; }
         public double CalculatedPI { get; set; }
         public string ImagePath { get; set; }
+        public bool? isValid { get; set; } 
 
         public void CalculatePI() //function that calculates PI and draws graphic representation of an object
         {
-            using (Image<Rgba32> image = new Image<Rgba32>(SquareSide, SquareSide)) //set background, make image
+            if (ValidateInput() == true)
             {
-                image.BackgroundColor(Rgba32.White);
-                image.Save("wwwroot/images/image.png");
-            }
-
-            DrawCircle("wwwroot/images/image.png", SquareSide / 2);
-            DrawBorders("wwwroot/images/image.png", SquareSide);
-
-            int i = 0;
-            int numInCircle = 0;
-            int total = 0;
-            Random rnd = new Random();
-
-            using (Image<Rgba32> image = Image.Load("wwwroot/images/image.png"))
-            {
-                while (i < PointsAmount)
+                isValid = true;
+                using (Image<Rgba32> image = new Image<Rgba32>(SquareSide, SquareSide)) //set background, make image
                 {
-                    int x = rnd.Next(0, SquareSide); // points in rectangle
-                    int y = rnd.Next(0, SquareSide);
-
-                    float center = SquareSide / 2;
-
-                    float Cx = x - center;
-                    float Cy = y - center;
-
-                    if (Cx * Cx + Cy * Cy <= SquareSide / 2 * SquareSide / 2) // Is the point in the circle?
-                    {
-                        ++numInCircle;
-                        image[x, y] = Rgba32.Green;
-                    }
-                    else
-                        image[x, y] = Rgba32.Blue;
-
-                    ++total;
-                    i++;
+                    image.BackgroundColor(Rgba32.White);
+                    image.Save("wwwroot/images/image.png");
                 }
 
-                image.Save("wwwroot/images/image.png");
-            }
+                DrawCircle("wwwroot/images/image.png", SquareSide / 2);
+                DrawBorders("wwwroot/images/image.png", SquareSide);
 
-            CalculatedPI = 4.0 * ((double)numInCircle / (double)total);
-            ImagePath = "~/images/image.png";
+                int i = 0;
+                int numInCircle = 0;
+                int total = 0;
+                Random rnd = new Random();
+
+                using (Image<Rgba32> image = Image.Load("wwwroot/images/image.png"))
+                {
+                    while (i < PointsAmount)
+                    {
+                        int x = rnd.Next(0, SquareSide); // points in rectangle
+                        int y = rnd.Next(0, SquareSide);
+
+                        float center = SquareSide / 2;
+
+                        float Cx = x - center;
+                        float Cy = y - center;
+
+                        if (Cx * Cx + Cy * Cy <= SquareSide / 2 * SquareSide / 2) // Is the point in the circle?
+                        {
+                            ++numInCircle;
+                            image[x, y] = Rgba32.Green;
+                        }
+                        else
+                            image[x, y] = Rgba32.Blue;
+
+                        ++total;
+                        i++;
+                    }
+
+                    image.Save("wwwroot/images/image.png");
+                }
+
+                CalculatedPI = 4.0 * ((double)numInCircle / (double)total);
+                ImagePath = "~/images/image.png";
+            }
+            else
+            {
+                isValid = false;
+            }
 
         }
 
@@ -90,6 +99,14 @@ namespace MVCMonteCarloPI.Entities
 
                 image.Save(imagePath.ToString());
             }
+        }
+
+        private bool ValidateInput()
+        {
+            if (PointsAmount >= 1 && PointsAmount <= 10000000 && SquareSide >= 10 && SquareSide <= 800)
+                return true;
+
+            return false;
         }
 
     }
