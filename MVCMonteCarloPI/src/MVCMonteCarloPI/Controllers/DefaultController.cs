@@ -12,7 +12,7 @@ namespace MVCMonteCarloPI.Controllers
     {
      
         [HttpGet]
-        public IActionResult IndexGET(Properties model)
+        public IActionResult IndexGET(PICalculationModel model)
         {
             if (model.SquareSide != 0)
                 return View("Index", model);
@@ -21,10 +21,9 @@ namespace MVCMonteCarloPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult IndexPOST(Properties model)
+        public IActionResult IndexPOST(PICalculationModel model)
         {
-            model.CalculatedPI = Logic.CalculatePI(model.PointsAmount, model.SquareSide);
-
+            model.CalculatePI();
             return RedirectToAction("IndexGET", model);
         }
 

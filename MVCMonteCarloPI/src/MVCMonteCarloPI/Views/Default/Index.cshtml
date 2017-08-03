@@ -1,4 +1,4 @@
-﻿@model MVCMonteCarloPI.Entities.Properties
+﻿@model MVCMonteCarloPI.Entities.PICalculationModel
 
 <h1>Approximating PI using the Monte Carlo method</h1>
 <br />
@@ -8,7 +8,7 @@
 @using (Html.BeginForm())
 {
     <div class="form-group">
-        @Html.LabelFor(m => m.PointsAmount, "How many random points? (1- 10 000 000)", new { @class = "col-md-4 control-label" })
+        @Html.LabelFor(m => m.PointsAmount, "How many random points? (1 - 10 000 000)", new { @class = "col-md-4 control-label" })
         @Html.TextBoxFor(m => m.PointsAmount, new { @class = "form-control input-md" }) 
     </div>
 
@@ -21,14 +21,13 @@
         <input type="submit" value="Calculate!" class="btn btn-primary" />
     </div>
 
-    @if(Model is MVCMonteCarloPI.Entities.Properties)
+    @if(Model is MVCMonteCarloPI.Entities.PICalculationModel)
     {
     <div class="form-group">
-        @Html.Label("CalculatedPI", "Calculated PI: ", new { @class = "col-md-4 control-label" })
-        @Model.CalculatedPI
+        Pi calculated with <b>@Model.PointsAmount</b> random points and <b>@Model.SquareSide</b> side of the square size. Approximated Pi = <b>@Model.CalculatedPI</b>
     </div>
 
-    <img src="@Url.Content(Model.Image)" alt="Image" />
+    <img src="@Url.Content(Model.ImagePath)" alt="Image" />
     }
 
 }

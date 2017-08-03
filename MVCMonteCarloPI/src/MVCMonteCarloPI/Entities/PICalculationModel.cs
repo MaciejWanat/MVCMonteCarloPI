@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MVCMonteCarloPI.Entities;
-using ImageSharp;
-using System.IO;
+﻿using ImageSharp;
+using System;
 
-namespace MVCMonteCarloPI
+namespace MVCMonteCarloPI.Entities
 {
-    public class Logic
+    public class PICalculationModel
     {
-        
-        public static double CalculatePI(int pointsAmount, int squareSide)
+        public int PointsAmount { get; set; }
+        public int SquareSide { get; set; }
+        public double CalculatedPI { get; set; }
+        public string ImagePath { get; set; }
+
+        public void CalculatePI() //function that calculates PI and draws graphic representation of an objecy
         {
-            using (Image<Rgba32> image = new Image<Rgba32>(squareSide, squareSide))
+            using (Image<Rgba32> image = new Image<Rgba32>(SquareSide, SquareSide))
             {
-                image.BackgroundColor(Rgba32.White);               
-                DrawCircle(image, squareSide / 2);
-            }            
+                image.BackgroundColor(Rgba32.White);
+                DrawCircle(image, SquareSide / 2);
+            }
 
             int i = 0;
             int numInCircle = 0;
@@ -26,17 +25,17 @@ namespace MVCMonteCarloPI
 
             using (Image<Rgba32> image = Image.Load("wwwroot/images/image.png"))
             {
-                while (i < pointsAmount)
+                while (i < PointsAmount)
                 {
-                    int x = rnd.Next(0, squareSide); // points in rectangle
-                    int y = rnd.Next(0, squareSide);
+                    int x = rnd.Next(0, SquareSide); // points in rectangle
+                    int y = rnd.Next(0, SquareSide);
 
-                    float center = squareSide / 2;
+                    float center = SquareSide / 2;
 
                     float Cx = x - center;
                     float Cy = y - center;
 
-                    if (Cx * Cx + Cy * Cy <= squareSide / 2 * squareSide / 2) // Is the point in the circle?
+                    if (Cx * Cx + Cy * Cy <= SquareSide / 2 * SquareSide / 2) // Is the point in the circle?
                     {
                         ++numInCircle;
                         image[x, y] = Rgba32.Green;
@@ -47,13 +46,12 @@ namespace MVCMonteCarloPI
                     ++total;
                     i++;
                 }
-                
+
                 image.Save("wwwroot/images/image.png");
             }
 
-            double piApproximation = 4.0 * ((double)numInCircle / (double)total);
-
-            return piApproximation;
+            CalculatedPI = 4.0 * ((double)numInCircle / (double)total);
+            ImagePath = "~/images/image.png";
 
         }
 
@@ -73,5 +71,6 @@ namespace MVCMonteCarloPI
                 image.Save("wwwroot/images/image.png");
             }
         }
+
     }
 }
