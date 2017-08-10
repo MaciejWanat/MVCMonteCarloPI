@@ -235,3 +235,7 @@ _Pvt_Extensions
 
 # Generated image
 wwwroot/images/image.png
+MVCMonteCarloPI/test/wwwroot/images/image.png
+
+# Publish profiles
+MVCMonteCarloPI/src/MVCMonteCarloPI/Properties/PublishProfiles/

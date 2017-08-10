@@ -8,12 +8,12 @@
 @using (Html.BeginForm())
 {
     <div class="form-group">
-        @Html.LabelFor(m => m.PointsAmount, "How many random points? (1 - 10 000 000)", new { @class = "col-md-4 control-label" })
+        @Html.LabelFor(m => m.PointsAmount, "How many random points? (1 - 100 000 000)", new { @class = "col-md-4 control-label" })
         @Html.TextBoxFor(m => m.PointsAmount, new { @class = "form-control input-md", @type = "number" }) 
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.SquareSide, "How long should the side of a square be? (100-800)", new { @class = "col-md-4 control-label" })
+        @Html.LabelFor(m => m.SquareSide, "How long should the side of a square be? (10-1000)", new { @class = "col-md-4 control-label" })
         @Html.TextBoxFor(m => m.SquareSide, new { @class = "form-control input-md", @type = "number" }) 
     </div>
 

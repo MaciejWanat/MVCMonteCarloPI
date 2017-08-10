@@ -103,7 +103,7 @@ namespace MVCMonteCarloPI.Entities
 
         private bool ValidateInput()
         {
-            if (PointsAmount >= 1 && PointsAmount <= 10000000 && SquareSide >= 10 && SquareSide <= 800)
+            if (PointsAmount >= 1 && PointsAmount <= 100000000 && SquareSide >= 10 && SquareSide <= 1000)
                 return true;
 
             return false;
