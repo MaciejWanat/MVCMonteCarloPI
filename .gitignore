@@ -234,8 +234,8 @@ _Pvt_Extensions
 .fake/
 
 # Generated image
-wwwroot/images/image.png
-MVCMonteCarloPI/test/wwwroot/images/image.png
+MVCMonteCarloPI/src/MVCMonteCarloPI/wwwroot/images/image.png
+MVCMonteCarloPI/test/MVCMonteCarloPiTest/wwwroot/images/image.png
 
 # Publish profiles
 MVCMonteCarloPI/src/MVCMonteCarloPI/Properties/PublishProfiles/
